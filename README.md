@@ -19,17 +19,23 @@ output/                   imágenes finales
 ```bash
 pip install pillow numpy
 
-# 1) pre entreno Shaaboom, 4 sobres en abanico
+# 1) pre entreno Shaaboom Pump Shot, 4 tomas en abanico
 python3 tools/make_hero.py --out output/preentreno-shaaboom-4-tomas.png \
-    fotos/shaaboom1.jpg fotos/shaaboom2.jpg fotos/shaaboom3.jpg fotos/shaaboom4.jpg
+    --layout fan --angulo 0 --solape 0.32 --alto 0.58 --fill 0.72 \
+    fotos/shaaboom-pump-shot.jpg fotos/shaaboom-pump-shot.jpg \
+    fotos/shaaboom-pump-shot.jpg fotos/shaaboom-pump-shot.jpg
 
 # 2) bebidas Maximum proteína + Hidralife, en fila
-python3 tools/make_hero.py --out output/maximum-hidralife.png --layout row \
-    fotos/maximum-frutos-rojos.jpg fotos/maximum-vainilla.jpg fotos/hidralife-uva.jpg
+python3 tools/make_hero.py --out output/maximum-hidralife.png \
+    --layout row --hero 1.08 --alto 0.55 --fill 0.82 \
+    fotos/hidralife-manzana.png fotos/hidralife-ponche.png \
+    fotos/maximum-frutos-tropicales.jpg \
+    fotos/hidralife-blueberry.png fotos/hidralife-uva.png
 ```
 
-Opciones: `--layout fan|row`, `--fill` (cuánto ocupa el producto dentro del aro,
-0.78 por defecto), `--alto`, `--plate` (otro fondo).
+Opciones: `--layout fan|row`, `--fill` (cuánto ocupa el producto dentro del aro),
+`--alto`, `--solape` y `--angulo` (abanico), `--hero` (cuánto más grande va el
+producto del centro en la fila), `--plate` (otro fondo).
 
 Las fotos pueden tener fondo blanco o liso (se recorta automáticamente con
 flood fill desde las esquinas) o venir ya en PNG con transparencia, que se

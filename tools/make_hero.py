@@ -51,8 +51,16 @@ def _trim(im):
 
 
 def _scaled(im, height):
+    """Reescala manteniendo proporcion; si hay que ampliar, reenfoca un poco."""
     w, h = im.size
-    return im.resize((max(1, round(w * height / h)), height), Image.LANCZOS)
+    k = height / h
+    out = im.resize((max(1, round(w * k)), height), Image.LANCZOS)
+    if k > 1.4:
+        rgb = out.convert("RGB").filter(
+            ImageFilter.UnsharpMask(radius=1.6, percent=int(min(140, 55 * k)), threshold=3)
+        )
+        out = Image.merge("RGBA", rgb.split() + (out.split()[3],))
+    return out
 
 
 def layout_fan(items, height, angle=-7.0, overlap=0.42, rise=0.035):
@@ -73,7 +81,7 @@ def layout_fan(items, height, angle=-7.0, overlap=0.42, rise=0.035):
     return _trim(canvas)
 
 
-def layout_row(items, height, gap=0.06, hero=1.0, arc=0.05):
+def layout_row(items, height, gap=0.05, hero=1.0, arc=0.0):
     """Botellas/latas en fila, la del centro al frente y algo mas grande."""
     n = len(items)
     mid = (n - 1) / 2
@@ -98,7 +106,7 @@ def layout_row(items, height, gap=0.06, hero=1.0, arc=0.05):
     return _trim(canvas)
 
 
-def shadow(group, blur=34, offset=(0, 26), opacity=0.55, spread=1.03):
+def shadow(group, blur=16, offset=(0, 18), opacity=0.45, spread=1.0):
     a = group.split()[3].resize(
         (int(group.size[0] * spread), int(group.size[1] * spread)), Image.LANCZOS
     ).filter(ImageFilter.GaussianBlur(blur))
@@ -107,10 +115,12 @@ def shadow(group, blur=34, offset=(0, 26), opacity=0.55, spread=1.03):
     return sh, offset
 
 
-def build(paths, out, layout="fan", fill=0.78, height_frac=0.74, plate="assets/plate_glow.png"):
+def build(paths, out, layout="fan", fill=0.78, height_frac=0.74,
+          plate="assets/plate_glow.png", angle=-7.0, overlap=0.42, hero=1.0):
     items = [cutout(p) for p in paths]
     h = int(SIZE * height_frac)
-    group = layout_fan(items, h) if layout == "fan" else layout_row(items, h)
+    group = (layout_fan(items, h, angle=angle, overlap=overlap)
+             if layout == "fan" else layout_row(items, h, hero=hero))
 
     max_w, max_h = SIZE * fill, SIZE * 0.86
     k = min(max_w / group.size[0], max_h / group.size[1])
@@ -139,5 +149,9 @@ if __name__ == "__main__":
     ap.add_argument("--fill", type=float, default=0.78)
     ap.add_argument("--alto", type=float, default=0.74, dest="height_frac")
     ap.add_argument("--plate", default="assets/plate_glow.png")
+    ap.add_argument("--angulo", type=float, default=-7.0, dest="angle")
+    ap.add_argument("--solape", type=float, default=0.42, dest="overlap")
+    ap.add_argument("--hero", type=float, default=1.0)
     a = ap.parse_args()
-    build(a.fotos, a.out, a.layout, a.fill, a.height_frac, a.plate)
+    build(a.fotos, a.out, a.layout, a.fill, a.height_frac, a.plate,
+          a.angle, a.overlap, a.hero)
