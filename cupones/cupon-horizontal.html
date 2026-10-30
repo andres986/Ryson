@@ -1,0 +1,232 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Cupón Ryson horizontal</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,400;0,600;0,800;0,900;1,800;1,900&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #0b0b0d;
+    --panel: #141417;
+    --line: #2b2b31;
+    --red: #e3141f;
+    --gold: #d9b878;
+    --white: #f5f5f3;
+    --muted: #9b9ba3;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: #2a2a2e; font-family: "Inter", system-ui, sans-serif; color: var(--white); padding: 40px; }
+
+  /* ---------- cupón digital 1920 x 1080 ---------- */
+  .coupon {
+    width: 1920px; height: 1080px;
+    background: var(--ink); position: relative; overflow: hidden;
+    padding: 50px 64px 40px; display: flex; flex-direction: column;
+  }
+  .coupon::before { /* textura diagonal */
+    content: ""; position: absolute; inset: 0;
+    background: repeating-linear-gradient(135deg, rgba(255,255,255,.025) 0 3px, transparent 3px 22px);
+  }
+  .coupon::after { /* resplandor rojo superior */
+    content: ""; position: absolute; left: 50%; top: -420px; width: 1800px; height: 760px; transform: translateX(-50%);
+    background: radial-gradient(ellipse, rgba(227,20,31,.25), transparent 65%);
+  }
+  .coupon > * { position: relative; z-index: 1; }
+
+  /* ---------- encabezado ---------- */
+  .head { display: flex; align-items: center; justify-content: space-between; }
+  .lockup { display: flex; align-items: center; gap: 26px; }
+  .ryson b {
+    display: block; font-weight: 900; font-style: italic; font-size: 80px; line-height: 1;
+    letter-spacing: -2px;
+  }
+  .ryson b span { color: var(--red); }
+  .ryson small {
+    display: block; font-size: 15px; letter-spacing: 8px; font-weight: 600;
+    color: var(--muted); text-transform: uppercase; margin-top: 8px;
+  }
+  .lockup .x { font-weight: 300; font-size: 64px; color: var(--red); line-height: 1; margin-top: -22px; }
+  .lockup .at { width: 124px; height: 124px; border-radius: 50%; box-shadow: 0 0 0 3px #2b2b31, 0 0 0 6px var(--red), 0 0 40px rgba(227,20,31,.45); }
+
+  h1 {
+    text-align: right; font-weight: 900; font-style: italic; text-transform: uppercase;
+    font-size: 104px; line-height: .9; letter-spacing: -3px;
+  }
+  h1 em { color: var(--red); font-style: italic; }
+  .alianza { text-align: right; margin-top: 14px; font-size: 17px; letter-spacing: 6px; font-weight: 800; color: var(--muted); text-transform: uppercase; }
+  .alianza span { color: var(--red); }
+
+  /* ---------- tarjeta ---------- */
+  .card {
+    margin-top: 34px; flex: 1; display: grid; grid-template-columns: 780px 0 1fr;
+    background: var(--panel); border: 1px solid var(--line); border-radius: 32px; overflow: hidden;
+  }
+
+  /* ---------- regalo: pre-entreno ---------- */
+  .gift { position: relative; display: grid; grid-template-columns: 1fr 300px; padding: 40px 34px 34px 44px; overflow: hidden; }
+  .gift::before { /* resplandor detrás del producto */
+    content: ""; position: absolute; right: -120px; top: 40px; width: 640px; height: 640px;
+    background: radial-gradient(circle, rgba(227,20,31,.5) 0%, rgba(227,20,31,.14) 40%, transparent 68%);
+  }
+  .gift > * { position: relative; }
+  .k { font-size: 17px; letter-spacing: 5px; color: var(--red); font-weight: 800; text-transform: uppercase; }
+  .gift h2 { font-size: 74px; font-weight: 900; font-style: italic; text-transform: uppercase; line-height: .92; letter-spacing: -2px; margin-top: 10px; }
+  .gift h2 em { color: var(--red); font-style: italic; }
+  .gift .sub { font-size: 24px; color: var(--muted); margin-top: 14px; }
+  .gift .sub b { color: var(--white); }
+
+  .servings { display: flex; align-items: center; gap: 14px; margin-top: 22px; }
+  .servings .dots { display: flex; gap: 6px; }
+  .servings .dots i {
+    width: 34px; height: 34px; border-radius: 50%; background: var(--red); display: grid; place-items: center;
+    font-style: normal; font-weight: 900; font-size: 16px; box-shadow: 0 0 12px rgba(227,20,31,.6);
+  }
+  .servings span { font-size: 20px; font-weight: 800; letter-spacing: 1px; text-transform: uppercase; }
+  .servings span small { display: block; font-size: 15px; color: var(--muted); font-weight: 600; letter-spacing: .5px; text-transform: none; }
+
+  .specs { margin-top: 26px; display: grid; gap: 10px; }
+  .spec {
+    display: grid; grid-template-columns: 150px 1fr; align-items: center;
+    border: 1px solid var(--line); border-left: 4px solid var(--gold); border-radius: 10px;
+    background: rgba(255,255,255,.03); padding: 9px 16px;
+  }
+  .spec b { font-size: 28px; font-weight: 900; font-style: italic; color: var(--gold); letter-spacing: -.5px; }
+  .spec b small { font-size: 16px; font-style: normal; margin-left: 2px; }
+  .spec span { font-size: 18px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; }
+  .spec span small { display: block; font-size: 14px; color: var(--muted); font-weight: 600; text-transform: none; letter-spacing: 0; }
+
+  .gift > div:first-child { display: flex; flex-direction: column; }
+  .where {
+    margin-top: auto; align-self: flex-start; font-size: 19px; color: #c9c9cf;
+    border: 1px solid var(--line); border-radius: 999px; padding: 10px 20px 10px 16px; background: rgba(255,255,255,.03);
+  }
+  .where::before { content: "●"; color: var(--red); margin-right: 10px; }
+  .where b { color: var(--white); }
+  .stage { position: relative; }
+  .ring {
+    position: absolute; left: 50%; top: 46%; width: 330px; height: 330px; transform: translate(-50%, -50%);
+    border: 5px solid var(--red); border-radius: 50%;
+    box-shadow: 0 0 30px rgba(227,20,31,.65), inset 0 0 30px rgba(227,20,31,.35);
+  }
+  .pedestal {
+    position: absolute; left: 50%; bottom: 40px; width: 250px; height: 70px; transform: translateX(-50%);
+    background: linear-gradient(#202024, #0c0c0e); border-radius: 50%;
+    box-shadow: 0 -2px 0 rgba(227,20,31,.9), 0 -8px 26px rgba(227,20,31,.45), 0 18px 30px rgba(0,0,0,.8);
+  }
+  .bottle {
+    position: absolute; left: 50%; bottom: 74px; height: 430px; transform: translateX(-50%);
+    filter: drop-shadow(0 14px 18px rgba(0,0,0,.75));
+  }
+  .sticker {
+    position: absolute; right: -6px; top: 58px; transform: rotate(10deg);
+    background: var(--red); color: var(--white); font-weight: 900; font-style: italic; font-size: 34px;
+    padding: 8px 20px; border-radius: 10px; letter-spacing: 1px; box-shadow: 0 8px 20px rgba(0,0,0,.6);
+  }
+  .sticker small { display: block; font-size: 13px; font-style: normal; letter-spacing: 3px; font-weight: 800; text-align: center; opacity: .9; }
+  .flavor {
+    position: absolute; left: 6px; top: 150px; transform: rotate(-8deg);
+    background: #1aa6d8; color: #04131a; font-weight: 900; font-size: 15px; letter-spacing: 3px;
+    padding: 6px 12px; border-radius: 6px; text-transform: uppercase; box-shadow: 0 6px 16px rgba(0,0,0,.5);
+  }
+
+  /* perforación vertical */
+  .perf { position: relative; border-left: 3px dashed #34343b; margin: 40px 0; }
+  .perf::before, .perf::after {
+    content: ""; position: absolute; left: -26px; width: 50px; height: 50px; border-radius: 50%; background: var(--ink);
+  }
+  .perf::before { top: -66px; } .perf::after { bottom: -66px; }
+
+  /* ---------- Nomad ---------- */
+  .nomad { display: flex; flex-direction: column; }
+  .nomad .top { display: flex; align-items: center; gap: 30px; padding: 34px 40px 22px 44px; }
+  .nomad .pct { font-weight: 900; font-style: italic; font-size: 124px; line-height: .82; letter-spacing: -5px; }
+  .nomad .pct span { color: var(--red); font-size: 66px; vertical-align: top; margin-right: 4px; letter-spacing: -2px; }
+  .nomad .what .lbl { font-size: 18px; letter-spacing: 5px; font-weight: 800; text-transform: uppercase; }
+  .nomad .what img { width: 300px; display: block; margin-top: 10px; }
+  .nomad .what small { display: block; font-size: 15px; letter-spacing: 3px; color: var(--muted); text-transform: uppercase; margin-top: 8px; font-weight: 600; }
+  .code { margin-left: auto; text-align: center; }
+  .code small { display: block; font-size: 14px; letter-spacing: 4px; color: var(--muted); font-weight: 700; }
+  .code b {
+    display: inline-block; margin-top: 8px; font-size: 44px; font-weight: 900; letter-spacing: 5px;
+    border: 3px dashed var(--red); border-radius: 12px; padding: 6px 22px; background: rgba(227,20,31,.08);
+  }
+  .code em { display: block; font-style: normal; font-size: 15px; color: var(--muted); margin-top: 8px; }
+  .nomad .photo {
+    flex: 1; margin: 0 24px 24px 30px; border-radius: 22px; border: 1px solid var(--line);
+    background: #000 url("img/nomad-linea.jpg") center 60% / cover no-repeat;
+  }
+
+  .terms { margin-top: 18px; font-size: 17px; color: #6c6c74; letter-spacing: .3px; text-align: center; }
+  .terms b { color: #a3a3ab; }
+</style>
+</head>
+<body>
+
+<section class="coupon" id="cupon-h">
+  <div class="head">
+    <div class="lockup">
+      <div class="ryson"><b>RYS<span>O</span>N</b><small>Suplementos</small></div>
+      <div class="x">×</div>
+      <img class="at" src="img/advance-trainer.png" alt="Advance Trainer">
+    </div>
+    <div>
+      <h1>Un regalo <em>de mi parte</em></h1>
+      <div class="alianza">Ryson <span>×</span> Advance Trainer</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <!-- regalo -->
+    <div class="gift">
+      <div>
+        <div class="k">Tu regalo</div>
+        <h2>Pre-entreno<br><em>gratis</em></h2>
+        <div class="sub"><b>Shaaboom Pump</b> · Kevin Levrone</div>
+
+        <div class="servings">
+          <div class="dots"><i>1</i><i>2</i><i>3</i><i>4</i></div>
+          <span>4 servicios<small>en cada botella</small></span>
+        </div>
+
+        <div class="specs">
+          <div class="spec"><b>6000<small>mg</small></b><span>Citrulina malato<small>Bombeo y flujo sanguíneo</small></span></div>
+          <div class="spec"><b>3200<small>mg</small></b><span>Beta-alanina<small>Resistencia en cada serie</small></span></div>
+          <div class="spec"><b>2000<small>mg</small></b><span>Arginina AKG<small>Más pump</small></span></div>
+        </div>
+
+        <div class="where">Canjéalo en <b>tienda Ryson</b></div>
+      </div>
+
+      <div class="stage">
+        <div class="ring"></div>
+        <div class="pedestal"></div>
+        <img class="bottle" src="img/shaaboom-pump.png" alt="Shaaboom Pump">
+        <div class="sticker">GRATIS<small>REGALO</small></div>
+        <div class="flavor">Sabor Exotic</div>
+      </div>
+    </div>
+
+    <div class="perf"></div>
+
+    <!-- Nomad -->
+    <div class="nomad">
+      <div class="top">
+        <div class="pct"><span>+</span>10%</div>
+        <div class="what">
+          <div class="lbl">de descuento en</div>
+          <img src="img/nomad.png" alt="Nomad">
+          <small>Accesorios de gimnasio</small>
+        </div>
+        <div class="code"><small>CÓDIGO</small><b>RYSON5</b><em>en la tienda de Nomad</em></div>
+      </div>
+      <div class="photo"></div>
+    </div>
+  </div>
+
+  <p class="terms"><b>Pre-entreno:</b> muestra este cupón desde tu celular en tienda Ryson. &nbsp;·&nbsp; <b>Nomad:</b> canjea tu 10% con el código RYSON5. &nbsp;·&nbsp; Válido por una sola ocasión.</p>
+</section>
+
+</body>
+</html>
