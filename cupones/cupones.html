@@ -77,16 +77,18 @@
   .k { font-size: 16px; letter-spacing: 4px; color: var(--red); font-weight: 800; text-transform: uppercase; }
   .gift b { display: block; font-size: 58px; font-weight: 900; font-style: italic; text-transform: uppercase; line-height: 1; letter-spacing: -1.5px; margin-top: 6px; }
   .gift small { display: block; font-size: 24px; color: var(--muted); margin-top: 6px; }
+  .gift small + small { margin-top: 2px; font-size: 20px; }
+  .gift .srv { display: inline; font-size: 24px; font-style: normal; letter-spacing: 0; color: var(--white); font-weight: 800; text-transform: none; }
 
   /* descuento: Nomad */
   .nomad {
     position: relative; flex: 1; margin: 0 22px; border-radius: 22px; overflow: hidden;
-    background: #000 url("img/nomad-productos.jpg") right 100% / 80% auto no-repeat;
+    background: #000 url("img/nomad-accesorios.jpg") right center / auto 100% no-repeat;
     border: 1px solid var(--line);
   }
   .nomad::before {
     content: ""; position: absolute; inset: 0;
-    background: linear-gradient(90deg, #000 0%, #000 30%, rgba(0,0,0,.75) 48%, rgba(0,0,0,0) 72%);
+    background: linear-gradient(90deg, #000 0%, #000 28%, rgba(0,0,0,.7) 40%, rgba(0,0,0,0) 56%);
   }
   .nomad .txt { position: relative; height: 100%; padding: 26px 30px; display: flex; flex-direction: column; justify-content: center; }
   .nomad .pct { font-weight: 900; font-style: italic; font-size: 118px; line-height: .85; letter-spacing: -5px; }
@@ -135,7 +137,8 @@
       <div>
         <div class="k">Tu regalo</div>
         <b>Pre-entreno<br>gratis</b>
-        <small>Shaaboom Pump · en tienda Ryson</small>
+        <small>Shaaboom Pump · <b class="srv">4 servicios</b></small>
+        <small>en tienda Ryson</small>
       </div>
     </div>
 
