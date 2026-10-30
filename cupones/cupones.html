@@ -5,16 +5,15 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Cupones Ryson</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Anton&family=Archivo+Black&family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,400;0,600;0,800;0,900;1,800;1,900&display=swap" rel="stylesheet">
 <style>
   :root {
-    --ink: #0d0d0f;
-    --panel: #151518;
-    --line: #2a2a30;
-    --lime: #c6ff00;
-    --white: #f4f4f2;
-    --muted: #9a9aa3;
-    --sand: #e9e2d3;
+    --ink: #0b0b0d;
+    --panel: #141417;
+    --line: #2b2b31;
+    --red: #e3141f;
+    --white: #f5f5f3;
+    --muted: #9b9ba3;
   }
   * { box-sizing: border-box; margin: 0; padding: 0; }
   @page { size: letter; margin: 0.4in; }
@@ -28,174 +27,166 @@
   }
   @media print { body { background: #fff; padding: 0; } }
 
+  .cut { border: 1px dashed #888; padding: 8px; border-radius: 20px; } /* línea de corte */
+
   /* ---------- cupón base: 7.5in x 3.25in ---------- */
   .coupon {
     width: 7.5in; height: 3.25in;
     background: var(--ink);
     border-radius: 14px;
-    display: grid; grid-template-columns: 1fr 1.9in;
+    display: grid; grid-template-columns: 1fr 1.75in;
     position: relative; overflow: hidden;
     /* muescas recortadas (transparentes) */
-    -webkit-mask: radial-gradient(circle 12px at calc(100% - 1.9in) 0, #0000 97%, #000),
-                  radial-gradient(circle 12px at calc(100% - 1.9in) 100%, #0000 97%, #000);
+    -webkit-mask: radial-gradient(circle 12px at calc(100% - 1.75in) 0, #0000 97%, #000),
+                  radial-gradient(circle 12px at calc(100% - 1.75in) 100%, #0000 97%, #000);
     -webkit-mask-composite: source-in; mask-composite: intersect;
   }
-  .cut { border: 1px dashed #888; padding: 8px; border-radius: 20px; } /* línea de corte */
   .coupon::before { /* textura diagonal */
     content: ""; position: absolute; inset: 0;
-    background: repeating-linear-gradient(135deg, rgba(255,255,255,.025) 0 2px, transparent 2px 14px);
+    background: repeating-linear-gradient(135deg, rgba(255,255,255,.022) 0 2px, transparent 2px 14px);
     pointer-events: none;
   }
-  .slash {
-    position: absolute; top: -40px; left: 3.6in; width: 120px; height: 140%;
-    background: var(--lime); transform: skewX(-18deg); opacity: .07;
-  }
 
-  .main { padding: 22px 26px 18px; display: flex; flex-direction: column; position: relative; z-index: 1; }
-  .top { display: flex; align-items: center; justify-content: space-between; }
+  .main { position: relative; padding: 20px 0 18px 24px; display: flex; flex-direction: column; z-index: 1; }
+  .copy { width: 3.35in; display: flex; flex-direction: column; height: 100%; position: relative; z-index: 2; }
 
-  /* ---------- logo RYSON ---------- */
-  .ryson { display: flex; align-items: center; gap: 9px; }
-  .ryson .mark {
-    width: 34px; height: 34px; background: var(--lime); color: var(--ink);
-    display: grid; place-items: center;
-    font-family: "Anton", sans-serif; font-size: 25px; line-height: 1;
-    clip-path: polygon(18% 0, 100% 0, 82% 100%, 0 100%);
-    padding-left: 2px;
+  /* ---------- logo RYSON (misma tipografía de las piezas de la tienda) ---------- */
+  .ryson b {
+    display: block; font-weight: 900; font-style: italic; font-size: 30px; line-height: 1;
+    letter-spacing: -.5px; color: var(--white);
   }
-  .ryson .word { line-height: .9; }
-  .ryson .word b {
-    display: block; font-family: "Anton", sans-serif; font-weight: 400;
-    font-size: 30px; letter-spacing: 3px; font-style: italic; color: var(--white);
-  }
-  .ryson .word small {
-    display: block; font-size: 7.5px; letter-spacing: 3.2px; font-weight: 600;
-    color: var(--lime); text-transform: uppercase; margin-top: 3px;
-  }
-
-  .x { font-family: "Anton"; color: var(--muted); font-size: 16px; margin: 0 2px; }
-
-  /* espacio para logo del centro de entrenamiento */
-  .logo-slot {
-    width: 1.45in; height: .62in; border: 1.5px dashed #55555e; border-radius: 8px;
-    display: grid; place-items: center; text-align: center;
-    font-size: 6.5px; letter-spacing: .9px; color: #77777f; padding: 0 6px; font-weight: 600; text-transform: uppercase; line-height: 1.5;
+  .ryson b span { color: var(--red); }
+  .ryson small {
+    display: block; font-size: 7px; letter-spacing: 3.6px; font-weight: 600;
+    color: var(--muted); text-transform: uppercase; margin-top: 4px;
   }
 
   .tag {
-    margin-top: 16px; display: inline-flex; align-self: flex-start; align-items: center; gap: 6px;
-    background: var(--lime); color: var(--ink); font-weight: 800; font-size: 10px;
-    letter-spacing: 2.5px; text-transform: uppercase; padding: 4px 10px 4px 8px;
+    margin-top: 14px; align-self: flex-start;
+    background: var(--red); color: var(--white); font-weight: 900; font-style: italic; font-size: 10px;
+    letter-spacing: 2px; text-transform: uppercase; padding: 4px 12px 4px 9px;
     clip-path: polygon(0 0, 100% 0, 94% 100%, 0 100%);
   }
   h1 {
-    font-family: "Anton", sans-serif; font-weight: 400; text-transform: uppercase;
-    font-size: 46px; line-height: .95; letter-spacing: .5px; margin-top: 8px;
+    font-weight: 900; font-style: italic; text-transform: uppercase;
+    font-size: 40px; line-height: .92; letter-spacing: -1px; margin-top: 8px;
   }
-  h1 em { font-style: normal; color: var(--lime); }
-  .sub { font-size: 11.5px; color: #c9c9cf; margin-top: 7px; max-width: 4.6in; line-height: 1.4; }
-  .sub b { color: var(--white); }
+  h1 em { color: var(--red); font-style: italic; }
 
-  .fields { margin-top: auto; display: flex; gap: 16px; }
-  .field { flex: 1; font-size: 7.5px; letter-spacing: 1.6px; color: var(--muted); text-transform: uppercase; font-weight: 600; }
-  .field span { display: block; border-bottom: 1px solid #44444c; height: 15px; }
+  .items { display: flex; gap: 8px; margin-top: 12px; align-items: center; }
+  .item {
+    border: 1px solid var(--line); border-radius: 8px; padding: 6px 11px;
+    background: rgba(255,255,255,.03);
+  }
+  .item b { display: block; font-size: 10.5px; font-weight: 800; text-transform: uppercase; letter-spacing: .5px; }
+  .item small { display: block; font-size: 8.5px; color: var(--muted); margin-top: 1px; }
+  .plus, .or {
+    width: 22px; height: 22px; border-radius: 50%; display: grid; place-items: center; flex: none;
+    font-weight: 900; font-size: 12px;
+  }
+  .plus { background: var(--red); color: var(--white); }
+  .or { background: var(--white); color: var(--ink); font-size: 10px; }
+
+  .fields { margin-top: auto; display: flex; gap: 14px; }
+  .field { flex: 1; font-size: 7px; letter-spacing: 1.6px; color: var(--muted); text-transform: uppercase; font-weight: 600; }
+  .field span { display: block; border-bottom: 1px solid #44444c; height: 14px; }
+
+  .terms { position: absolute; bottom: 7px; left: 24px; right: 2.0in; font-size: 6px; color: #66666e; letter-spacing: .2px; z-index: 2; }
+
+  /* ---------- productos ---------- */
+  .visual { position: absolute; right: 0; top: 0; bottom: 0; width: 2.45in; z-index: 1; }
+  .glow {
+    position: absolute; left: 50%; top: 55%; width: 2.4in; height: 2.4in; transform: translate(-50%, -50%);
+    background: radial-gradient(circle, rgba(227,20,31,.55) 0%, rgba(227,20,31,.18) 38%, transparent 68%);
+  }
+  .ring {
+    position: absolute; left: 50%; top: 55%; width: 2.05in; height: 2.05in; transform: translate(-50%, -50%);
+    border: 3px solid var(--red); border-radius: 50%; opacity: .9;
+    box-shadow: 0 0 18px rgba(227,20,31,.6), inset 0 0 18px rgba(227,20,31,.35);
+  }
+  .floor {
+    position: absolute; left: 12%; right: 12%; bottom: .32in; height: 14px; border-radius: 50%;
+    background: radial-gradient(ellipse, rgba(0,0,0,.85), transparent 70%);
+  }
+  .shots { position: absolute; bottom: .36in; display: flex; }
+  .shots img { height: 1.5in; filter: drop-shadow(0 4px 6px rgba(0,0,0,.6)); }
+  .shots img + img { margin-left: -.24in; }
+  .shots img:nth-child(1), .shots img:nth-child(4) { height: 1.38in; align-self: flex-end; }
+  .bottle { position: absolute; bottom: .34in; filter: drop-shadow(0 6px 8px rgba(0,0,0,.7)); }
+  .badge {
+    position: absolute; background: var(--white); color: var(--ink); font-weight: 900; font-style: italic;
+    font-size: 11px; padding: 3px 8px; border-radius: 4px; letter-spacing: .5px;
+    box-shadow: 0 2px 6px rgba(0,0,0,.5);
+  }
+  .badge.red { background: var(--red); color: var(--white); }
 
   /* ---------- talón derecho ---------- */
   .stub {
     border-left: 2px dashed #3a3a42; position: relative; z-index: 1;
-    padding: 20px 16px 16px; display: flex; flex-direction: column; align-items: center; text-align: center;
+    padding: 16px 14px 14px; display: flex; flex-direction: column; align-items: center; text-align: center;
     background: var(--panel);
   }
+  .stub .at { width: 0.98in; height: 0.98in; border-radius: 50%; box-shadow: 0 0 0 2px #2b2b31, 0 0 0 3.5px var(--red); }
+  .stub .with { font-size: 6.5px; letter-spacing: 2.2px; color: var(--muted); font-weight: 600; text-transform: uppercase; margin-bottom: 7px; }
+  .stub .label { font-size: 7.5px; letter-spacing: 2.4px; color: var(--muted); font-weight: 600; text-transform: uppercase; margin-top: 12px; }
+  .stub .big { font-weight: 900; font-style: italic; font-size: 34px; line-height: 1; color: var(--red); margin-top: 3px; letter-spacing: -1px; }
+  .stub .big-sub { font-size: 8.5px; letter-spacing: 1.6px; text-transform: uppercase; font-weight: 800; margin-top: 2px; }
+  .stub .folio { margin-top: auto; font-size: 7px; letter-spacing: 2px; color: var(--muted); }
+  .stub .folio b { display: block; font-size: 12px; color: var(--white); letter-spacing: 3px; margin-top: 2px; font-weight: 800; }
 
-  .stub .label { font-size: 8px; letter-spacing: 2.4px; color: var(--muted); font-weight: 600; text-transform: uppercase; }
-  .stub .big { font-family: "Anton"; font-size: 40px; line-height: 1; color: var(--lime); margin-top: 6px; }
-  .stub .big-sub { font-size: 9px; letter-spacing: 1.6px; text-transform: uppercase; font-weight: 800; margin-top: 2px; }
-  .stub .folio { margin-top: auto; font-family: "Inter"; font-size: 8px; letter-spacing: 2px; color: var(--muted); }
-  .stub .folio b { display: block; font-size: 13px; color: var(--white); letter-spacing: 3px; margin-top: 3px; font-weight: 800; }
-  .terms { position: absolute; bottom: 8px; left: 26px; right: 2.1in; font-size: 6.5px; color: #6c6c74; letter-spacing: .3px; z-index: 1; }
-
-  /* ---------- items (cupón 1) ---------- */
-  .items { display: flex; gap: 10px; margin-top: 12px; }
-  .item {
-    display: flex; align-items: center; gap: 8px; border: 1px solid var(--line); border-radius: 8px;
-    padding: 6px 12px 6px 8px; background: rgba(255,255,255,.02);
+  /* ---------- Nomad ---------- */
+  .nomad {
+    margin-top: 11px; display: flex; align-items: center; gap: 12px; align-self: flex-start;
+    background: #000; border: 1px solid var(--line); border-left: 3px solid var(--red);
+    border-radius: 6px; padding: 7px 12px 7px 10px;
   }
-  .item .ico { width: 26px; height: 26px; color: var(--lime); }
-  .item b { display: block; font-size: 11px; font-weight: 800; text-transform: uppercase; letter-spacing: .6px; }
-  .item small { display: block; font-size: 8.5px; color: var(--muted); }
-  .plus { font-family: "Anton"; color: var(--lime); font-size: 20px; align-self: center; }
-
-  /* ---------- cupón 2 ---------- */
-  .or {
-    font-family: "Inter"; font-weight: 800; font-size: 11px; color: var(--ink); background: var(--white);
-    border-radius: 50%; width: 26px; height: 26px; display: grid; place-items: center; align-self: center;
-  }
-  .nomada {
-    margin-top: 10px; display: flex; align-items: center; gap: 12px;
-    background: var(--sand); color: var(--ink); border-radius: 8px; padding: 7px 12px 7px 7px;
-    align-self: flex-start;
-  }
-  .nomada .n {
-    width: 38px; height: 38px; border-radius: 6px; background: var(--ink); color: var(--sand);
-    display: grid; place-items: center; font-family: "Archivo Black", sans-serif; font-size: 24px;
-  }
-  .nomada .txt b { display: block; font-family: "Archivo Black"; font-size: 13px; letter-spacing: 2px; }
-  .nomada .txt small { display: block; font-size: 8.5px; color: #4a463e; letter-spacing: .4px; }
-  .nomada .pct { font-family: "Anton"; font-size: 30px; line-height: 1; margin-left: 8px; }
-  .nomada .pct small { font-family: "Inter"; font-size: 8px; font-weight: 800; letter-spacing: 1.5px; display: block; }
+  .nomad .logo img { height: 22px; display: block; }
+  .nomad .logo small { display: block; font-size: 7px; letter-spacing: 1.6px; color: var(--muted); text-transform: uppercase; margin-top: 4px; font-weight: 600; }
+  .nomad .pct { font-weight: 900; font-style: italic; font-size: 26px; line-height: 1; padding-left: 12px; border-left: 1px solid var(--line); letter-spacing: -1px; }
+  .nomad .pct small { display: block; font-size: 7px; font-style: normal; font-weight: 800; letter-spacing: 1.6px; margin-top: 2px; color: var(--red); }
+  .nm-water { position: absolute; right: -.15in; top: -.05in; width: 2.6in; opacity: .06; z-index: 0; }
 </style>
 </head>
 <body>
 
-<!-- ICONOS -->
-<svg width="0" height="0" style="position:absolute">
-  <symbol id="i-tub" viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round">
-    <rect x="8" y="4" width="16" height="5" rx="1.5"/><path d="M7 9h18v17a3 3 0 0 1-3 3H10a3 3 0 0 1-3-3z"/>
-    <path d="M17 13l-4 6h5l-3 6" stroke-linecap="round"/>
-  </symbol>
-  <symbol id="i-cup" viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" stroke-linecap="round">
-    <path d="M8 9h16l-2 19H10z"/><path d="M7 9h18"/><path d="M17 9l3-6h4"/><path d="M9.5 16h13"/>
-  </symbol>
-</svg>
-
 <!-- =================== CUPÓN 1 =================== -->
 <div class="cut"><section class="coupon" id="cupon-1">
-  <div class="slash"></div>
   <div class="main">
-    <div class="top">
-      <div class="ryson">
-        <div class="mark">R</div>
-        <div class="word"><b>RYSON</b><small>Suplementos</small></div>
-      </div>
-      <div class="logo-slot">Logo<br>centro de entrenamiento</div>
-    </div>
+    <div class="copy">
+      <div class="ryson"><b>RYS<span>O</span>N</b><small>Suplementos</small></div>
 
-    <span class="tag">★ Cupón de regalo</span>
-    <h1>Tu combo <em>de regalo</em></h1>
+      <span class="tag">★ Cupón de regalo</span>
+      <h1>Tu combo<br><em>de regalo</em></h1>
 
-    <div class="items">
-      <div class="item">
-        <svg class="ico"><use href="#i-tub"/></svg>
-        <div><b>Pre-entreno</b><small>4 servicios</small></div>
+      <div class="items">
+        <div class="item"><b>Pre-entreno</b><small>Shaaboom Pump · 4 servicios</small></div>
+        <div class="plus">+</div>
+        <div class="item"><b>Bebida</b><small>Hidralife</small></div>
       </div>
-      <div class="plus">+</div>
-      <div class="item">
-        <svg class="ico"><use href="#i-cup"/></svg>
-        <div><b>Bebida</b><small>a elegir</small></div>
+
+      <div class="fields">
+        <div class="field">Nombre<span></span></div>
+        <div class="field">Válido hasta<span></span></div>
       </div>
     </div>
 
-    <div class="fields">
-      <div class="field">Nombre<span></span></div>
-      <div class="field">Válido hasta<span></span></div>
+    <div class="visual">
+      <div class="glow"></div><div class="ring"></div><div class="floor"></div>
+      <div class="shots" style="left:.12in">
+        <img src="img/shaaboom-pump.png" alt=""><img src="img/shaaboom-pump.png" alt=""><img src="img/shaaboom-pump.png" alt=""><img src="img/shaaboom-pump.png" alt="">
+      </div>
+      <img class="bottle" src="img/hidralife-manzana.png" alt="" style="height:1.62in; right:.16in">
+      <span class="badge red" style="left:.12in; top:.62in">x4</span>
+      <span class="badge" style="right:.1in; top:.78in">+1</span>
     </div>
   </div>
 
   <aside class="stub">
+    <div class="with">En alianza con</div>
+    <img class="at" src="img/advance-trainer.png" alt="Advance Trainer">
     <div class="label">Incluye</div>
     <div class="big">2</div>
     <div class="big-sub">Regalos</div>
-    <div class="big-sub" style="color:var(--muted);font-weight:600;margin-top:6px;font-size:8px">Pre-entreno + bebida</div>
     <div class="folio">FOLIO<b>RY-0001</b></div>
   </aside>
   <p class="terms">Presenta este cupón en tienda Ryson. Válido por una sola ocasión. No canjeable por efectivo.</p>
@@ -203,46 +194,45 @@
 
 <!-- =================== CUPÓN 2 =================== -->
 <div class="cut"><section class="coupon" id="cupon-2">
-  <div class="slash"></div>
   <div class="main">
-    <div class="top">
-      <div class="ryson">
-        <div class="mark">R</div>
-        <div class="word"><b>RYSON</b><small>Suplementos</small></div>
-      </div>
-      <div class="logo-slot">Logo<br>centro de entrenamiento</div>
-    </div>
+    <div class="copy">
+      <div class="ryson"><b>RYS<span>O</span>N</b><small>Suplementos</small></div>
 
-    <span class="tag">★ Cupón de regalo</span>
-    <h1>Elige <em>tu regalo</em></h1>
+      <span class="tag">★ Cupón de regalo</span>
+      <h1>Elige<br><em>tu regalo</em></h1>
 
-    <div class="items">
-      <div class="item">
-        <svg class="ico"><use href="#i-cup"/></svg>
-        <div><b>Bebida</b><small>a elegir</small></div>
+      <div class="items">
+        <div class="item"><b>Bebida</b><small>Hidralife</small></div>
+        <div class="or">O</div>
+        <div class="item"><b>Pre-entreno</b><small>Shaaboom Pump · 4 serv.</small></div>
       </div>
-      <div class="or">O</div>
-      <div class="item">
-        <svg class="ico"><use href="#i-tub"/></svg>
-        <div><b>Pre-entreno</b><small>4 servicios</small></div>
+
+      <div class="nomad">
+        <div class="logo"><img src="img/nomad.png" alt="Nomad"><small>Accesorios de gimnasio</small></div>
+        <div class="pct">10%<small>Descuento</small></div>
       </div>
     </div>
 
-    <div class="nomada">
-      <div class="n">N</div>
-      <div class="txt"><b>NÓMADA</b><small>Accesorios de gimnasio</small></div>
-      <div class="pct">10%<small>DESCUENTO</small></div>
+    <div class="visual">
+      <div class="glow"></div><div class="ring"></div><div class="floor"></div>
+      <img class="bottle" src="img/hidralife-manzana.png" alt="" style="height:1.62in; left:.2in">
+      <div class="shots" style="right:.1in">
+        <img src="img/shaaboom-pump.png" alt="" style="height:1.5in">
+      </div>
+      <span class="or" style="position:absolute; left:50%; top:58%; transform:translate(-50%,-50%); width:30px; height:30px; font-size:13px; box-shadow:0 2px 8px rgba(0,0,0,.6)">O</span>
+      <span class="badge red" style="right:.08in; top:.62in">4 serv.</span>
     </div>
   </div>
 
   <aside class="stub">
+    <div class="with">En alianza con</div>
+    <img class="at" src="img/advance-trainer.png" alt="Advance Trainer">
     <div class="label">Regalo +</div>
     <div class="big">10%</div>
-    <div class="big-sub">en Nómada</div>
-    <div class="field" style="width:100%;margin-top:14px;text-align:left">Válido hasta<span></span></div>
+    <div class="big-sub">en Nomad</div>
     <div class="folio">FOLIO<b>RY-0002</b></div>
   </aside>
-  <p class="terms">Elige una bebida o un pre-entreno en tienda Ryson. Descuento válido en Nómada presentando este cupón. Una sola ocasión.</p>
+  <p class="terms">Elige una bebida o un pre-entreno en tienda Ryson. Descuento válido en Nomad presentando este cupón. Una sola ocasión.</p>
 </section></div>
 
 </body>
